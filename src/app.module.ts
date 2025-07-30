@@ -17,7 +17,7 @@ import { ArticleModule } from 'src/api/article/article.module';
       inject: [ConfigService],
       // eslint-disable-next-line @typescript-eslint/require-await
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.getOrThrow<string>('MONGODB_URL'),
+        uri: configService.getOrThrow<string>('MONGO_DB_URL'),
       }),
     }),
     AuthModule,
