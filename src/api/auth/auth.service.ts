@@ -16,7 +16,7 @@ import type { Request, Response } from 'express';
 export class AuthService {
   private readonly COOKIE_DOMAIN: string;
   private readonly JWT_ACCESS_TOKEN_TTL: string;
-  private readonly JWT_REFRESH_TOKEN_TTL: string;
+  private readonly JWT_REFRESH_TOKEN_TTL: number;
 
   constructor(
     private readonly usersService: UserService,
@@ -27,8 +27,8 @@ export class AuthService {
     this.JWT_ACCESS_TOKEN_TTL = configService.getOrThrow<string>(
       'JWT_ACCESS_TOKEN_TTL',
     );
-    this.JWT_REFRESH_TOKEN_TTL = configService.getOrThrow<string>(
-      'JWT_REFRESH_TOKEN_TTL',
+    this.JWT_REFRESH_TOKEN_TTL = Number(
+      configService.getOrThrow<string>('JWT_REFRESH_TOKEN_TTL'),
     );
   }
 
@@ -81,7 +81,7 @@ export class AuthService {
     }
 
     const payload = this.jwtService.verify<JwtPayload>(refreshToken, {
-      secret: this.configService.getOrThrow<string>('JWT_REFRESH_TOKEN_SECRET'),
+      secret: this.configService.getOrThrow<string>('JWT_SECRET'),
     });
 
     if (!payload) {
@@ -106,7 +106,7 @@ export class AuthService {
       httpOnly: true,
       domain: this.COOKIE_DOMAIN,
       // secure: process.env.NODE_ENV === 'production',
-      sameSite: 'none', // Adjust as needed to 'Lax' or 'Strict'
+      sameSite: 'lax',
     });
 
     return { message: 'Logged out successfully' };
@@ -143,13 +143,13 @@ export class AuthService {
     };
   }
 
-  private setCookie(res: Response, value: string, expiresIn: string) {
+  private setCookie(res: Response, value: string, expiresIn: number) {
     res.cookie('refresh_token', value, {
       httpOnly: true,
       domain: this.COOKIE_DOMAIN,
       // secure: process.env.NODE_ENV === 'production',
-      maxAge: parseInt(expiresIn, 10) * 1000, // Convert seconds to milliseconds
-      sameSite: 'none', // Adjust as needed to 'Lax' or 'Strict'
+      sameSite: 'lax',
+      expires: new Date(Date.now() + expiresIn * 60 * 60 * 1000),
     });
   }
 }

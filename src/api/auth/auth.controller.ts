@@ -56,7 +56,6 @@ export class AuthController {
     return this.authService.register(user);
   }
 
-  @WithJWT()
   @HttpCode(HttpStatus.OK)
   @Post('refresh')
   async refresh(
