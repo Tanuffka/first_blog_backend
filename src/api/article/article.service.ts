@@ -19,7 +19,11 @@ export class ArticleService {
   ): Promise<ArticleDocument> {
     try {
       const newArticle = new this.articleModel({ ...article, author: userId });
-      return newArticle.save();
+      return (await newArticle.save()).populate('author', [
+        '_id',
+        'firstname',
+        'lastname',
+      ]);
     } catch (error) {
       const err = error as MongooseError;
       throw new Error('Error creating article: ' + err.message);
