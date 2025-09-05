@@ -12,7 +12,9 @@ export class CreateArticleDto {
   title: string;
 
   @IsNotEmpty({ message: 'Field content is required' })
-  @MaxLength(255, { message: 'Field content should not exceed 255 characters' })
+  @MaxLength(1000, {
+    message: 'Field content should not exceed 255 characters',
+  })
   content: string;
 
   @IsArray({ message: 'Field tags should be an array' })
