@@ -1,6 +1,10 @@
 import { Model, MongooseError } from 'mongoose';
 
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { hashPassword } from 'src/utils/password.util';
@@ -43,7 +47,11 @@ export class UserService {
     id: string,
     fields: (keyof UserDocument)[] = ['id', 'email', 'firstname', 'lastname'],
   ): Promise<UserDocument> {
-    return this.userModel.findById(id).select(fields).orFail().exec();
+    return this.userModel
+      .findById(id)
+      .select(fields)
+      .orFail(new NotFoundException('User not found'))
+      .exec();
   }
 
   async findOne(

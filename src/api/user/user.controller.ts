@@ -10,7 +10,8 @@ import {
   Put,
 } from '@nestjs/common';
 
-import { WithJWT } from '../auth/decorators/with-jwt.decorator';
+import { WithJWT } from 'src/api/auth/decorators/with-jwt.decorator';
+import { AuthorizedUser } from 'src/api/auth/decorators/authorized-user.decorator';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -32,6 +33,13 @@ export class UserController {
   @Get()
   async fetchAll() {
     return await this.userService.findAll();
+  }
+
+  @WithJWT()
+  @HttpCode(HttpStatus.OK)
+  @Get('/me')
+  async getMe(@AuthorizedUser('id') userId: string) {
+    return await this.userService.findById(userId);
   }
 
   @WithJWT()

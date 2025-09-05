@@ -33,6 +33,7 @@ export class ArticleService {
   async findAll(): Promise<ArticleDocument[]> {
     return await this.articleModel
       .find()
+      .sort({ createdAt: -1 })
       .populate('author', ['_id', 'firstname', 'lastname'])
       .exec();
   }
@@ -40,7 +41,7 @@ export class ArticleService {
   async findById(id: string): Promise<ArticleDocument> {
     return await this.articleModel
       .findById(id)
-      .orFail()
+      .orFail(new NotFoundException('Article not found'))
       .populate('author', ['_id', 'firstname', 'lastname'])
       .exec();
   }
