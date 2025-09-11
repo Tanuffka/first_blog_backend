@@ -17,7 +17,6 @@ import {
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { WithJWT } from './decorators/with-jwt.decorator';
 
 import type { Request, Response } from 'express';
 
@@ -65,7 +64,6 @@ export class AuthController {
     return this.authService.refreshToken(req, res);
   }
 
-  @WithJWT()
   @HttpCode(HttpStatus.OK)
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {

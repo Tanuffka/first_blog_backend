@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
@@ -81,12 +85,13 @@ export class AuthService {
       throw new NotFoundException('Refresh token not found');
     }
 
-    const payload = await this.jwtService.verifyAsync<JwtPayload>(
-      refresh_token,
-      {
+    const payload = await this.jwtService
+      .verifyAsync<JwtPayload>(refresh_token, {
         secret: this.configService.getOrThrow<string>('JWT_SECRET'),
-      },
-    );
+      })
+      .catch((reason) => {
+        throw new ForbiddenException(reason);
+      });
 
     if (!payload) {
       throw new NotFoundException('Invalid refresh token');
