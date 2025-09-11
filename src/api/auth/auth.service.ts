@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { UserDocument } from 'src/api/user/schema/user.schema';
 import { UserService } from 'src/api/user/user.service';
 import { comparePassword } from 'src/utils/password.util';
+import { ms, type StringValue } from 'src/utils/ms.util';
 
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -15,8 +16,8 @@ import type { Request, Response } from 'express';
 @Injectable()
 export class AuthService {
   private readonly COOKIE_DOMAIN: string;
-  private readonly JWT_ACCESS_TOKEN_TTL: string;
-  private readonly JWT_REFRESH_TOKEN_TTL: number;
+  private readonly JWT_ACCESS_TOKEN_TTL: StringValue;
+  private readonly JWT_REFRESH_TOKEN_TTL: StringValue;
 
   constructor(
     private readonly usersService: UserService,
@@ -24,11 +25,11 @@ export class AuthService {
     private readonly configService: ConfigService,
   ) {
     this.COOKIE_DOMAIN = configService.getOrThrow<string>('COOKIE_DOMAIN');
-    this.JWT_ACCESS_TOKEN_TTL = configService.getOrThrow<string>(
+    this.JWT_ACCESS_TOKEN_TTL = configService.getOrThrow<StringValue>(
       'JWT_ACCESS_TOKEN_TTL',
     );
-    this.JWT_REFRESH_TOKEN_TTL = Number(
-      configService.getOrThrow<string>('JWT_REFRESH_TOKEN_TTL'),
+    this.JWT_REFRESH_TOKEN_TTL = configService.getOrThrow<StringValue>(
+      'JWT_REFRESH_TOKEN_TTL',
     );
   }
 
@@ -74,25 +75,24 @@ export class AuthService {
   }
 
   async refreshToken(req: Request, res: Response) {
-    const refreshToken = req.cookies['refresh_token'] as string;
+    const refresh_token = req.cookies['refresh_token'] as string;
 
-    if (!refreshToken) {
+    if (!refresh_token) {
       throw new NotFoundException('Refresh token not found');
     }
 
-    const payload = this.jwtService.verify<JwtPayload>(refreshToken, {
-      secret: this.configService.getOrThrow<string>('JWT_SECRET'),
-    });
+    const payload = await this.jwtService.verifyAsync<JwtPayload>(
+      refresh_token,
+      {
+        secret: this.configService.getOrThrow<string>('JWT_SECRET'),
+      },
+    );
 
     if (!payload) {
       throw new NotFoundException('Invalid refresh token');
     }
 
-    const user = await this.usersService.findById(payload.sub, [
-      '_id',
-      'firstname',
-      'lastname',
-    ]);
+    const user = await this.usersService.findById(payload.sub, ['_id']);
 
     if (!user) {
       throw new NotFoundException('User not found');
@@ -112,44 +112,48 @@ export class AuthService {
     return { message: 'Logged out successfully' };
   }
 
-  private authenticate(res: Response, user: UserDocument) {
-    const { access_token, refresh_token } = this.generateJwtToken(user);
+  private async authenticate(res: Response, user: UserDocument) {
+    const { access_token, refresh_token, refreshTokenExpiresIn } =
+      await this.generateJwtToken(user);
 
-    this.setCookie(res, refresh_token, this.JWT_REFRESH_TOKEN_TTL);
+    this.setCookie(res, refresh_token, refreshTokenExpiresIn);
 
     return {
       access_token,
     };
   }
 
-  private generateJwtToken(user: UserDocument) {
+  private async generateJwtToken(user: UserDocument) {
     const payload: JwtPayload = {
       sub: user.id as string,
-      firstname: user.firstname,
-      lastname: user.lastname,
     };
 
-    const access_token = this.jwtService.sign(payload, {
+    const refreshTokenExpiresIn = new Date(
+      Date.now() + ms(this.JWT_REFRESH_TOKEN_TTL),
+    );
+
+    const access_token = await this.jwtService.signAsync(payload, {
       expiresIn: this.JWT_ACCESS_TOKEN_TTL,
     });
 
-    const refresh_token = this.jwtService.sign(payload, {
+    const refresh_token = await this.jwtService.signAsync(payload, {
       expiresIn: this.JWT_REFRESH_TOKEN_TTL,
     });
 
     return {
       access_token,
       refresh_token,
+      refreshTokenExpiresIn,
     };
   }
 
-  private setCookie(res: Response, value: string, expiresIn: number) {
+  private setCookie(res: Response, value: string, expires: Date) {
     res.cookie('refresh_token', value, {
       httpOnly: true,
       domain: this.COOKIE_DOMAIN,
       // secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      expires: new Date(Date.now() + expiresIn * 60 * 60 * 1000),
+      expires,
     });
   }
 }

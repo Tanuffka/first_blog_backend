@@ -50,7 +50,7 @@ export class UserService {
     return this.userModel
       .findById(id)
       .select(fields)
-      .orFail(new NotFoundException('User not found'))
+      .orFail(new NotFoundException('User not found')) // !important: need for auth validate
       .exec();
   }
 
