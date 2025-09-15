@@ -1,18 +1,18 @@
-import { IsEmail, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class UpdateUserDto {
-  @IsEmail(undefined, { message: 'Email field should be valid' })
-  @IsString()
-  @IsNotEmpty({ message: 'Email field is required' })
-  email: string;
-
   @IsString()
   @IsNotEmpty({ message: 'Firstname field is required' })
-  @MaxLength(20, { message: 'Firstname should not exceed 50 characters' })
+  @MaxLength(20, { message: 'Firstname should not exceed 20 characters' })
   firstname: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Lastname field is required' })
-  @MaxLength(20, { message: 'Lastname should not exceed 50 characters' })
+  @MaxLength(50, { message: 'Lastname should not exceed 50 characters' })
   lastname: string;
+
+  @IsString()
+  @IsOptional()
+  @MaxLength(100, { message: 'Bio should not exceed 100 characters' })
+  bio: string;
 }

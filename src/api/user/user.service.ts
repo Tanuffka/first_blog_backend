@@ -45,7 +45,13 @@ export class UserService {
 
   async findById(
     id: string,
-    fields: (keyof UserDocument)[] = ['id', 'email', 'firstname', 'lastname'],
+    fields: (keyof UserDocument)[] = [
+      'id',
+      'email',
+      'firstname',
+      'lastname',
+      'bio',
+    ],
   ): Promise<UserDocument> {
     return this.userModel
       .findById(id)
@@ -56,7 +62,13 @@ export class UserService {
 
   async findOne(
     email: string,
-    fields: (keyof UserDocument)[] = ['id', 'email', 'firstname', 'lastname'],
+    fields: (keyof UserDocument)[] = [
+      'id',
+      'email',
+      'firstname',
+      'lastname',
+      'bio',
+    ],
   ): Promise<UserDocument | null | undefined> {
     return this.userModel.findOne({ email }).select(fields).exec();
   }
@@ -64,7 +76,7 @@ export class UserService {
   async update(id: string, user: UpdateUserDto): Promise<UserDocument> {
     return await this.userModel
       .findByIdAndUpdate(id, user, { new: true })
-      .select('id email firstname lastname')
+      .select('id email firstname lastname bio')
       .orFail()
       .exec();
   }
