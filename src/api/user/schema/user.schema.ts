@@ -14,13 +14,25 @@ export class User {
   lastname: string;
 
   @Prop({ required: false })
-  bio: string;
+  bio?: string;
+
+  @Prop({ required: false })
+  avatarUrl?: string;
 
   @Prop({ required: true })
   passwordHash: string;
 }
 
+export const PUBLIC_USER_FIELDS: (keyof UserDocument)[] = [
+  'id',
+  'email',
+  'firstname',
+  'lastname',
+  'bio',
+  'avatarUrl',
+];
+
 export const UserSchema = SchemaFactory.createForClass(User);
 
 export type UserDocument = HydratedDocument<User>;
-export type SafeUser = Omit<UserDocument, 'passwordHash'>;
+export type PublicUserData = Omit<UserDocument, 'passwordHash'>;

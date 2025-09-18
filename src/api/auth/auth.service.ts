@@ -8,8 +8,8 @@ import { ConfigService } from '@nestjs/config';
 
 import { UserDocument } from 'src/api/user/schema/user.schema';
 import { UserService } from 'src/api/user/user.service';
-import { comparePassword } from 'src/utils/password.util';
-import { ms, type StringValue } from 'src/utils/ms.util';
+import { comparePassword } from 'src/shared/utils/password.util';
+import { ms, type StringValue } from 'src/shared/utils/ms.util';
 
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';

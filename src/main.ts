@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { setupSwagger } from 'src/utils/swagger.util';
+import { setupSwagger } from 'src/shared/utils/swagger.util';
 
 import { AppModule } from './app.module';
 
