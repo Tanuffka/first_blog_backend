@@ -20,7 +20,7 @@ export const multerConfig = {
       const extraPath = isSourceAvatar
         ? `users/${authenticatedUser.id}`
         : `${entityId}`;
-      const path = `./public/${extraPath}`;
+      const path = `./storage/${extraPath}`;
       fs.mkdirSync(path, { recursive: true });
       callback(null, path);
     },
@@ -39,7 +39,7 @@ export const fileFilter = (
   callback: (error: Error | null, acceptFile: boolean) => void,
 ) => {
   // Allow only image files
-  if (!file.mimetype.match(/\/(jpg|jpeg|png)$/)) {
+  if (!file.mimetype.match(/\/(jpg|jpeg|png|webp)$/)) {
     return callback(new Error('Only image files are allowed'), false);
   }
   callback(null, true);

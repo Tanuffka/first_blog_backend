@@ -56,7 +56,7 @@ export class UserController {
   ) {
     return await this.userService.updateAvatar(
       userId,
-      `/public/users/${userId}/${file.filename}`,
+      `/storage/users/${userId}/${file.filename}`,
     );
   }
 

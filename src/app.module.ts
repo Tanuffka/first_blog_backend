@@ -24,8 +24,8 @@ import { FileModule } from 'src/api/file/file.module';
       }),
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(process.cwd(), 'public'),
-      serveRoot: '/public/',
+      rootPath: join(process.cwd(), 'storage'),
+      serveRoot: '/storage/',
     }),
     FileModule,
     AuthModule,
