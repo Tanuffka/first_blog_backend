@@ -49,7 +49,7 @@ export class ArticleService {
   async update(
     id: string,
     userId: string,
-    updateArticleDto: UpdateArticleDto,
+    data: UpdateArticleDto,
   ): Promise<ArticleDocument> {
     return await this.articleModel
       .findOneAndUpdate(
@@ -57,7 +57,7 @@ export class ArticleService {
           _id: id,
           author: userId,
         },
-        updateArticleDto,
+        data,
         {
           new: true,
         },
