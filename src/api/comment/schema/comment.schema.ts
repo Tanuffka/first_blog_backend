@@ -3,6 +3,7 @@ import { type HydratedDocument, Types } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 import { User } from 'src/api/user/schema/user.schema';
+import { Article } from 'src/api/article/schema/article.schema';
 
 @Schema({
   timestamps: true,
@@ -10,26 +11,23 @@ import { User } from 'src/api/user/schema/user.schema';
   toJSON: { versionKey: false },
   toObject: { versionKey: false },
 })
-export class Article {
-  @Prop({ required: true })
-  title: string;
-
+export class Comment {
   @Prop({ required: true })
   content: string;
 
-  @Prop({ default: [] })
-  tags: string[];
+  @Prop({ default: false })
+  isEdited: boolean;
 
-  @Prop({ default: 0 })
-  viewsCount: number;
+  @Prop({ required: true, ref: Article.name })
+  article: Types.ObjectId;
 
   @Prop({ required: true, ref: User.name })
   author: Types.ObjectId;
 
-  @Prop({ nullable: true })
-  imageUrl: string;
+  @Prop({ ref: Comment.name })
+  responseTo: Types.ObjectId;
 }
 
-export const ArticleSchema = SchemaFactory.createForClass(Article);
+export const CommentSchema = SchemaFactory.createForClass(Comment);
 
-export type ArticleDocument = HydratedDocument<Article>;
+export type CommentDocument = HydratedDocument<Comment>;

@@ -2,7 +2,12 @@ import { type HydratedDocument } from 'mongoose';
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-@Schema({ timestamps: true, id: true })
+@Schema({
+  timestamps: true,
+  id: true,
+  toJSON: { versionKey: false },
+  toObject: { versionKey: false },
+})
 export class User {
   @Prop({ required: true, unique: true })
   email: string;
@@ -29,6 +34,13 @@ export const PUBLIC_USER_FIELDS: (keyof UserDocument)[] = [
   'firstname',
   'lastname',
   'bio',
+  'avatarUrl',
+];
+
+export const SOCIAL_USER_FIELDS: (keyof UserDocument)[] = [
+  'id',
+  'firstname',
+  'lastname',
   'avatarUrl',
 ];
 

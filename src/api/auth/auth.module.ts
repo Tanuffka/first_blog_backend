@@ -11,8 +11,6 @@ import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategy/jwt-auth.strategy';
 
 @Module({
-  controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
   imports: [
     UserModule,
     PassportModule,
@@ -22,5 +20,7 @@ import { JwtStrategy } from './strategy/jwt-auth.strategy';
       inject: [ConfigService],
     }),
   ],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}

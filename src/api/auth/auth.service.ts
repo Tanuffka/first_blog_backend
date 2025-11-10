@@ -24,7 +24,7 @@ export class AuthService {
   private readonly JWT_REFRESH_TOKEN_TTL: StringValue;
 
   constructor(
-    private readonly usersService: UserService,
+    private readonly userService: UserService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
   ) {
@@ -38,11 +38,11 @@ export class AuthService {
   }
 
   async validate(id: string): Promise<UserDocument> {
-    return await this.usersService.findById(id);
+    return await this.userService.findById(id);
   }
 
   async login(res: Response, credentials: LoginDto) {
-    const user = await this.usersService.findOne(credentials.email, [
+    const user = await this.userService.findOne(credentials.email, [
       '_id',
       'firstname',
       'lastname',
@@ -68,7 +68,7 @@ export class AuthService {
   }
 
   async register({ email, password, firstname, lastname }: RegisterDto) {
-    const user = await this.usersService.create({
+    const user = await this.userService.create({
       email,
       password,
       firstname,
@@ -97,7 +97,7 @@ export class AuthService {
       throw new NotFoundException('Invalid refresh token');
     }
 
-    const user = await this.usersService.findById(payload.sub, ['_id']);
+    const user = await this.userService.findById(payload.sub, ['_id']);
 
     if (!user) {
       throw new NotFoundException('User not found');

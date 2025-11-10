@@ -8,6 +8,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { AuthModule } from 'src/api/auth/auth.module';
 import { UserModule } from 'src/api/user/user.module';
 import { ArticleModule } from 'src/api/article/article.module';
+import { CommentModule } from 'src/api/comment/comment.module';
 import { FileModule } from 'src/api/file/file.module';
 
 @Module({
@@ -31,6 +32,7 @@ import { FileModule } from 'src/api/file/file.module';
     AuthModule,
     UserModule,
     ArticleModule,
+    CommentModule,
   ],
 })
 export class AppModule {}

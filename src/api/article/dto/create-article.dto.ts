@@ -13,7 +13,7 @@ export class CreateArticleDto {
 
   @IsNotEmpty({ message: 'Field content is required' })
   @MaxLength(1000, {
-    message: 'Field content should not exceed 255 characters',
+    message: 'Field content should not exceed 1000 characters',
   })
   content: string;
 

@@ -12,6 +12,7 @@ import {
 
 import { AuthorizedUser } from 'src/api/auth/decorators/authorized-user.decorator';
 import { WithJWT } from 'src/api/auth/decorators/with-jwt.decorator';
+import { CommentService } from 'src/api/comment/comment.service';
 
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -19,7 +20,10 @@ import { UpdateArticleDto } from './dto/update-article.dto';
 
 @Controller('articles')
 export class ArticleController {
-  constructor(private readonly articleService: ArticleService) {}
+  constructor(
+    private readonly articleService: ArticleService,
+    private readonly commentService: CommentService,
+  ) {}
 
   @WithJWT()
   @HttpCode(HttpStatus.CREATED)
@@ -33,14 +37,20 @@ export class ArticleController {
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  async findAll() {
-    return await this.articleService.findAll();
+  findAll() {
+    return this.articleService.findAll();
   }
 
   @HttpCode(HttpStatus.OK)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.articleService.findById(id);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Get(':id/comments')
+  findCommentsForArticle(@Param('id') id: string) {
+    return this.commentService.findAllByArticleId(id);
   }
 
   @WithJWT()
