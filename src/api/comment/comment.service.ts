@@ -38,8 +38,12 @@ export class CommentService {
     userId: string,
   ): Promise<CommentDocument> {
     try {
-      const newComment = new this.commentModel({ ...comment, author: userId });
-      return (await newComment.save()).populate(COMMENT_POPULATION_QUERY);
+      const newComment = await this.commentModel.create({
+        ...comment,
+        author: userId,
+      });
+
+      return newComment.populate(COMMENT_POPULATION_QUERY);
     } catch (error) {
       const err = error as MongooseError;
       throw new Error('Error creating comment: ' + err.message);
@@ -87,13 +91,13 @@ export class CommentService {
       .exec();
   }
 
-  async remove(id: string, userId: string): Promise<CommentDocument> {
+  async delete(id: string, userId: string): Promise<CommentDocument> {
     return await this.commentModel
       .findOneAndDelete({ _id: id, author: userId })
       .select('id')
       .orFail(
         new NotFoundException(
-          'Comment not found or user not authorized to update it',
+          'Comment not found or user not authorized to delete it',
         ),
       )
       .exec();

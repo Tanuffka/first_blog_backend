@@ -18,7 +18,6 @@ import {
 } from './schema/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { PatchUserDto } from './dto/patch-user.dto';
 
 @Injectable()
 export class UserService {
@@ -53,7 +52,7 @@ export class UserService {
     return await this.userModel
       .find()
       .select(PUBLIC_USER_FIELDS)
-      .orFail()
+      .orFail(new NotFoundException('Users not found'))
       .exec();
   }
 
@@ -77,33 +76,21 @@ export class UserService {
 
   async update(id: string, user: UpdateUserDto): Promise<PublicUserData> {
     return await this.userModel
-      .findByIdAndUpdate(id, user, { new: true })
+      .findByIdAndUpdate(
+        id,
+        {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          bio: user.bio,
+        },
+        { new: true },
+      )
       .select(PUBLIC_USER_FIELDS)
-      .orFail()
-      .exec();
-  }
-
-  /** NOTE: method written only for example */
-  async updatePartially(
-    id: string,
-    user: PatchUserDto,
-  ): Promise<PublicUserData> {
-    const query = Object.entries(user).reduce(
-      (result, [key, value]) => {
-        if (!value) return result;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        result.$set[key] = value;
-        return result;
-      },
-      {
-        $set: {},
-      },
-    );
-
-    return await this.userModel
-      .findByIdAndUpdate(id, query, { new: true })
-      .select(PUBLIC_USER_FIELDS)
-      .orFail()
+      .orFail(
+        new NotFoundException(
+          'User not found or user not authorized to update it',
+        ),
+      )
       .exec();
   }
 
@@ -115,7 +102,7 @@ export class UserService {
     const userDataBeforeUpdate = await this.userModel
       .findByIdAndUpdate(id, { avatarUrl }, { new: false })
       .select('avatarUrl')
-      .orFail()
+      .orFail(new NotFoundException('User not found'))
       .exec();
 
     /** NOTE: delete previous file if it exists */
@@ -130,7 +117,7 @@ export class UserService {
     const user = await this.userModel
       .findById(id)
       .select(PUBLIC_USER_FIELDS)
-      .orFail()
+      .orFail(new NotFoundException('User not found'))
       .exec();
 
     const { avatarUrl } = user;
@@ -150,7 +137,7 @@ export class UserService {
     return await this.userModel
       .findByIdAndDelete(id, { returnOriginal: true })
       .select('id')
-      .orFail()
+      .orFail(new NotFoundException('User not found'))
       .exec();
   }
 }

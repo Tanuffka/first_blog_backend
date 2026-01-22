@@ -2,9 +2,6 @@ import { type HydratedDocument, Types } from 'mongoose';
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { User } from 'src/api/user/schema/user.schema';
-import { Article } from 'src/api/article/schema/article.schema';
-
 @Schema({
   timestamps: true,
   id: true,
@@ -18,10 +15,10 @@ export class Comment {
   @Prop({ default: false })
   isEdited: boolean;
 
-  @Prop({ required: true, ref: Article.name })
+  @Prop({ required: true, ref: 'Article' })
   article: Types.ObjectId;
 
-  @Prop({ required: true, ref: User.name })
+  @Prop({ required: true, ref: 'User' })
   author: Types.ObjectId;
 
   @Prop({ ref: Comment.name })

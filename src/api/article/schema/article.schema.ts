@@ -2,11 +2,8 @@ import { type HydratedDocument, Types } from 'mongoose';
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { User } from 'src/api/user/schema/user.schema';
-
 @Schema({
   timestamps: true,
-  id: true,
   toJSON: { versionKey: false },
   toObject: { versionKey: false },
 })
@@ -17,17 +14,20 @@ export class Article {
   @Prop({ required: true })
   content: string;
 
-  @Prop({ default: [] })
-  tags: string[];
-
   @Prop({ default: 0 })
   viewsCount: number;
 
-  @Prop({ required: true, ref: User.name })
+  @Prop({ required: true, ref: 'User' })
   author: Types.ObjectId;
 
   @Prop({ nullable: true })
   imageUrl: string;
+
+  @Prop({
+    ref: 'Tag',
+    default: [],
+  })
+  tags: Types.ObjectId[];
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);

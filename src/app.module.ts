@@ -1,5 +1,7 @@
 import { join } from 'path';
 
+import mongoose from 'mongoose';
+
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -10,6 +12,9 @@ import { UserModule } from 'src/api/user/user.module';
 import { ArticleModule } from 'src/api/article/article.module';
 import { CommentModule } from 'src/api/comment/comment.module';
 import { FileModule } from 'src/api/file/file.module';
+import { TagModule } from 'src/api/tag/tag.module';
+
+mongoose.set('debug', true); /** @warning - enabled mongoose debug mode */
 
 @Module({
   imports: [
@@ -33,6 +38,7 @@ import { FileModule } from 'src/api/file/file.module';
     UserModule,
     ArticleModule,
     CommentModule,
+    TagModule,
   ],
 })
 export class AppModule {}
