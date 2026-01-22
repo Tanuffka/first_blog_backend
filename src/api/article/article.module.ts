@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { CommentModule } from 'src/api/comment/comment.module';
+import { TagModule } from 'src/api/tag/tag.module';
 
 import { ArticleService } from './article.service';
 import { ArticleController } from './article.controller';
@@ -12,7 +13,7 @@ const ArticleMongooseModule = MongooseModule.forFeature([
 ]);
 
 @Module({
-  imports: [ArticleMongooseModule, CommentModule],
+  imports: [ArticleMongooseModule, CommentModule, TagModule],
   controllers: [ArticleController],
   providers: [ArticleService],
 })

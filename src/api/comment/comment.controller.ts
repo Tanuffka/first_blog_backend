@@ -48,7 +48,7 @@ export class CommentController {
   @WithJWT()
   @HttpCode(HttpStatus.OK)
   @Delete(':id')
-  remove(@Param('id') id: string, @AuthorizedUser('id') userId: string) {
-    return this.commentService.remove(id, userId);
+  delete(@Param('id') id: string, @AuthorizedUser('id') userId: string) {
+    return this.commentService.delete(id, userId);
   }
 }

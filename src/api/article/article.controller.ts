@@ -67,7 +67,7 @@ export class ArticleController {
   @WithJWT()
   @HttpCode(HttpStatus.OK)
   @Delete(':id')
-  remove(@Param('id') id: string, @AuthorizedUser('id') userId: string) {
-    return this.articleService.remove(id, userId);
+  delete(@Param('id') id: string, @AuthorizedUser('id') userId: string) {
+    return this.articleService.delete(id, userId);
   }
 }
