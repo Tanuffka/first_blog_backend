@@ -1,0 +1,645 @@
+{
+  "name": "first-blog-api",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Add Comment to Article",
+      "filename": "Add Comment to Article.bru",
+      "seq": 12,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/comments",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"content\": \"My comment num 4\",\n  \"article\": \"68f54e43c3aff38510011830\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "All Users",
+      "filename": "All Users.bru",
+      "seq": 3,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/users",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Create Article",
+      "filename": "Create Article.bru",
+      "seq": 8,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/articles",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"title\": \"New Test with tags\",\n  \"content\": \"<p class=\\\"editor-paragraph\\\"><strong>fgdgfdgfd</strong> <u>gdhgt</u> <em>ngcfbnhgfc</em></p>\",\n  \"tags\": [\"hello_world\", \"new.world\"]\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete Article By ID",
+      "filename": "Delete Article By ID.bru",
+      "seq": 16,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/articles/:article_id",
+        "method": "DELETE",
+        "headers": [],
+        "params": [
+          {
+            "name": "article_id",
+            "value": "69699832b4da838958f24141",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete User Avatar",
+      "filename": "Delete User Avatar.bru",
+      "seq": 7,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/users/me/avatar",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": [
+            {
+              "filePath": "/Users/maksym/Desktop/photo/ava-1-full.png",
+              "contentType": "image/png",
+              "selected": true
+            }
+          ]
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Fetch All Articles",
+      "filename": "Fetch All Articles.bru",
+      "seq": 9,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/articles",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Fetch All Tags",
+      "filename": "Fetch All Tags.bru",
+      "seq": 14,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/tags",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Fetch Article By ID",
+      "filename": "Fetch Article By ID.bru",
+      "seq": 10,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/articles/:article_id",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "article_id",
+            "value": "6968173d05f708b4d14aff6a",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Fetch Comments for Article",
+      "filename": "Fetch Comments for Article.bru",
+      "seq": 11,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/articles/:article_id/comments",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "article_id",
+            "value": "68f54e43c3aff38510011830",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Fetch Me",
+      "filename": "Fetch Me.bru",
+      "seq": 6,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/users/me",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {
+          "res": "bru.setVar(\"authorized_user_id\", res.body._id);"
+        },
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Fetch Tag by Article ID",
+      "filename": "Fetch Tag by Article ID.bru",
+      "seq": 15,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/tags/:article_id",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "article_id",
+            "value": "696827035db1d1224b15dc95",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Login",
+      "filename": "Login.bru",
+      "seq": 2,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/auth/login",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"email\": \"maksym@email.com\",\n  \"password\": \"!Pasword12345\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {
+          "res": "bru.setVar(\"access_token\", res.body.access_token);\nbru.runRequest(\"Fetch Me\");"
+        },
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Update Comment",
+      "filename": "Update Comment.bru",
+      "seq": 13,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/comments/:id",
+        "method": "PUT",
+        "headers": [],
+        "params": [
+          {
+            "name": "id",
+            "value": "691127cbfa16e7f8f2d64500",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"content\": \"My comment num 4 (updated content)\",\n  \"article\": \"68f54e43c3aff38510011830\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Update User Avatar",
+      "filename": "Update User Avatar.bru",
+      "seq": 5,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/users/me/avatar",
+        "method": "PUT",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "multipartForm",
+          "formUrlEncoded": [],
+          "multipartForm": [
+            {
+              "type": "file",
+              "name": "file",
+              "value": [
+                "/Users/maksym/Desktop/photo/ava-1-mini.png"
+              ],
+              "enabled": true
+            }
+          ],
+          "file": [
+            {
+              "filePath": "/Users/maksym/Desktop/photo/ava-1-full.png",
+              "contentType": "image/png",
+              "selected": true
+            }
+          ]
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "User Avatar",
+      "filename": "User Avatar.bru",
+      "seq": 4,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_public}}/users/68c975b74d4862f2dcc3fef7/file-1758059612431-357851205.jpeg",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    }
+  ],
+  "activeEnvironmentUid": "lXELjogv4DDCIlLXsQGMg",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "host",
+          "value": "http://localhost:4000",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "host_api",
+          "value": "{{host}}/api",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "host_public",
+          "value": "{{host}}/public",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "authorized_user_id",
+          "value": "null",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "access_token",
+          "value": "",
+          "enabled": true,
+          "secret": true,
+          "type": "text"
+        }
+      ],
+      "name": "local"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "api-client-first-blog",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.0043926239013671875,
+    "filesCount": 16
+  },
+  "exportedAt": "2026-01-22T00:41:07.626Z",
+  "exportedUsing": "Bruno/3.0.2"
+}
