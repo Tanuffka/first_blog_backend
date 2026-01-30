@@ -1,0 +1,24 @@
+meta {
+  name: Fetch Article By ID
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{host_api}}/articles/:article_id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  article_id: 6968173d05f708b4d14aff6a
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

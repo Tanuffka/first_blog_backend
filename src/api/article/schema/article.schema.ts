@@ -20,14 +20,30 @@ export class Article {
   @Prop({ required: true, ref: 'User' })
   author: Types.ObjectId;
 
-  @Prop({ nullable: true })
-  imageUrl: string;
-
   @Prop({
     ref: 'Tag',
     default: [],
   })
   tags: Types.ObjectId[];
+
+  @Prop({ nullable: true, type: Object })
+  coverOriginalImage: {
+    fileKey: string;
+    fileDownloadUrl: string;
+  } | null;
+
+  @Prop({ nullable: true, type: Object })
+  coverCroppedImage: {
+    fileKey: string;
+    fileDownloadUrl: string;
+    cropOptions: {
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+      zoom: number;
+    };
+  } | null;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);

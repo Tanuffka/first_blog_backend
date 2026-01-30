@@ -1,4 +1,4 @@
-import { Model, MongooseError } from 'mongoose';
+import { Model } from 'mongoose';
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -60,8 +60,7 @@ export class ArticleService {
     } catch (error) {
       await session.abortTransaction();
 
-      const err = error as MongooseError;
-      throw new Error('Error creating article: ' + err.message);
+      throw error;
     }
   }
 
@@ -124,8 +123,7 @@ export class ArticleService {
     } catch (error) {
       await session.abortTransaction();
 
-      const err = error as MongooseError;
-      throw new Error('Error updating article: ' + err.message);
+      throw error;
     }
   }
 
@@ -156,8 +154,8 @@ export class ArticleService {
     } catch (error) {
       await session.abortTransaction();
 
-      const err = error as MongooseError;
-      throw new Error('Error deleting article: ' + err.message);
+      // const err = error as MongooseError;
+      throw error;
     }
   }
 }

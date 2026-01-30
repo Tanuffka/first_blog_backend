@@ -1,0 +1,31 @@
+meta {
+  name: Update Comment
+  type: http
+  seq: 12
+}
+
+put {
+  url: {{host_api}}/comments/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: 691127cbfa16e7f8f2d64500
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:json {
+  {
+    "content": "My comment num 4 (updated content)",
+    "article": "68f54e43c3aff38510011830"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

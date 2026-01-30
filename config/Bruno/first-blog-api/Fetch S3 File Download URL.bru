@@ -1,0 +1,26 @@
+meta {
+  name: Fetch S3 File Download URL
+  type: http
+  seq: 17
+}
+
+post {
+  url: {{host_api}}/file-storage/download-url
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:json {
+  {
+    "fileKey": "avatars/photo_2025-11-11 19.17.27.jpeg"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

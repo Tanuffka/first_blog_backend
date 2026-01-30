@@ -1,0 +1,28 @@
+meta {
+  name: Update User Avatar
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{host_api}}/users/me/avatar
+  body: multipartForm
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:multipart-form {
+  file: @file(/Users/maksym/Desktop/photo/ava-1-mini.png)
+}
+
+body:file {
+  file: @file(/Users/maksym/Desktop/photo/ava-1-full.png) @contentType(image/png)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

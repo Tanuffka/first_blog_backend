@@ -1,0 +1,24 @@
+meta {
+  name: Delete Article By ID
+  type: http
+  seq: 15
+}
+
+delete {
+  url: {{host_api}}/articles/:article_id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  article_id: 
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

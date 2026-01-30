@@ -1,10 +1,7 @@
-import {
-  IsArray,
-  IsNotEmpty,
-  IsOptional,
-  IsUrl,
-  MaxLength,
-} from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsArray, IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
+
+import { CoverCroppedImageDto, CoverOriginalImageDto } from './cover-image.dto';
 
 export class CreateArticleDto {
   @IsNotEmpty({ message: 'Field title is required' })
@@ -17,11 +14,15 @@ export class CreateArticleDto {
   })
   readonly content: string;
 
+  @IsNotEmpty({ message: 'Field tags is required' })
   @IsArray({ message: 'Field tags should be an array' })
-  @IsOptional()
   readonly tags: string[];
 
-  @IsUrl(undefined, { message: 'Field imageUrl should be a valid URL' })
+  @Type(() => CoverOriginalImageDto)
   @IsOptional()
-  readonly imageUrl: string;
+  readonly coverOriginalImage?: CoverOriginalImageDto;
+
+  @Type(() => CoverCroppedImageDto)
+  @IsOptional()
+  readonly coverCroppedImage?: CoverCroppedImageDto;
 }
