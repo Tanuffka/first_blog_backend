@@ -6,7 +6,7 @@
       "type": "http",
       "name": "Add Comment to Article",
       "filename": "Add Comment to Article.bru",
-      "seq": 12,
+      "seq": 11,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -42,7 +42,7 @@
       "type": "http",
       "name": "All Users",
       "filename": "All Users.bru",
-      "seq": 3,
+      "seq": 2,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -77,7 +77,7 @@
       "type": "http",
       "name": "Create Article",
       "filename": "Create Article.bru",
-      "seq": 8,
+      "seq": 7,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -91,7 +91,7 @@
         "params": [],
         "body": {
           "mode": "json",
-          "json": "{\n  \"title\": \"New Test with tags\",\n  \"content\": \"<p class=\\\"editor-paragraph\\\"><strong>fgdgfdgfd</strong> <u>gdhgt</u> <em>ngcfbnhgfc</em></p>\",\n  \"tags\": [\"hello_world\", \"new.world\"]\n}",
+          "json": "{\n  \"title\": \"New Test with tags\",\n  \"content\": \"<p class=\\\"editor-paragraph\\\"><strong>fgdgfdgfd</strong> <u>gdhgt</u> <em>ngcfbnhgfc</em></p>\",\n  \"tags\": [\"hello_world\", \"new.world\"],\n  \"coverOriginalImage\": {\n    \"fileKey\": \"folder_path/original_image_name.jpeg\",\n    \"fileDownloadUrl\": \"https://example.com/original-image-name.jpeg\"\n  },\n  \"coverCroppedImage\": {\n    \"fileKey\": \"folder_path/cropped_image_name.jpeg\",\n    \"fileDownloadUrl\": \"https://example.com/cropped-image-name.jpeg\",\n    \"cropOptions\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"width\": 1024,\n      \"height\": 1024,\n      \"zoom\": 1\n    }\n  }\n}",
           "formUrlEncoded": [],
           "multipartForm": [],
           "file": []
@@ -113,7 +113,7 @@
       "type": "http",
       "name": "Delete Article By ID",
       "filename": "Delete Article By ID.bru",
-      "seq": 16,
+      "seq": 15,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -127,7 +127,7 @@
         "params": [
           {
             "name": "article_id",
-            "value": "69699832b4da838958f24141",
+            "value": "",
             "type": "path",
             "enabled": true
           }
@@ -155,7 +155,7 @@
       "type": "http",
       "name": "Delete User Avatar",
       "filename": "Delete User Avatar.bru",
-      "seq": 7,
+      "seq": 6,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -196,7 +196,7 @@
       "type": "http",
       "name": "Fetch All Articles",
       "filename": "Fetch All Articles.bru",
-      "seq": 9,
+      "seq": 8,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -231,7 +231,7 @@
       "type": "http",
       "name": "Fetch All Tags",
       "filename": "Fetch All Tags.bru",
-      "seq": 14,
+      "seq": 13,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -266,7 +266,7 @@
       "type": "http",
       "name": "Fetch Article By ID",
       "filename": "Fetch Article By ID.bru",
-      "seq": 10,
+      "seq": 9,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -308,7 +308,7 @@
       "type": "http",
       "name": "Fetch Comments for Article",
       "filename": "Fetch Comments for Article.bru",
-      "seq": 11,
+      "seq": 10,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -350,7 +350,7 @@
       "type": "http",
       "name": "Fetch Me",
       "filename": "Fetch Me.bru",
-      "seq": 6,
+      "seq": 5,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -387,7 +387,7 @@
       "type": "http",
       "name": "Fetch Tag by Article ID",
       "filename": "Fetch Tag by Article ID.bru",
-      "seq": 15,
+      "seq": 14,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -429,7 +429,7 @@
       "type": "http",
       "name": "Login",
       "filename": "Login.bru",
-      "seq": 2,
+      "seq": 1,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -464,7 +464,7 @@
       "type": "http",
       "name": "Update Comment",
       "filename": "Update Comment.bru",
-      "seq": 13,
+      "seq": 12,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -507,7 +507,7 @@
       "type": "http",
       "name": "Update User Avatar",
       "filename": "Update User Avatar.bru",
-      "seq": 5,
+      "seq": 4,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -557,7 +557,7 @@
       "type": "http",
       "name": "User Avatar",
       "filename": "User Avatar.bru",
-      "seq": 4,
+      "seq": 3,
       "settings": {
         "encodeUrl": true,
         "timeout": 0
@@ -582,6 +582,78 @@
         "docs": "",
         "auth": {
           "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Fetch S3 File Upload URL",
+      "filename": "Fetch S3 File Upload URL.bru",
+      "seq": 16,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/file-storage/upload-url",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"fileKey\": \"avatars/photo_2025-11-11 19.17.27.jpeg\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Fetch S3 File Download URL",
+      "filename": "Fetch S3 File Download URL.bru",
+      "seq": 17,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "{{host_api}}/file-storage/download-url",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"fileKey\": \"avatars/photo_2025-11-11 19.17.27.jpeg\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "{{access_token}}"
+          }
         }
       }
     }
@@ -631,15 +703,13 @@
   ],
   "brunoConfig": {
     "version": "1",
-    "name": "api-client-first-blog",
+    "name": "first-blog-api",
     "type": "collection",
     "ignore": [
       "node_modules",
       ".git"
-    ],
-    "size": 0.0043926239013671875,
-    "filesCount": 16
+    ]
   },
-  "exportedAt": "2026-01-22T00:41:07.626Z",
+  "exportedAt": "2026-01-30T15:16:17.202Z",
   "exportedUsing": "Bruno/3.0.2"
 }

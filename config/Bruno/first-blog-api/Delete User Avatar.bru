@@ -1,0 +1,24 @@
+meta {
+  name: Delete User Avatar
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{host_api}}/users/me/avatar
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:file {
+  file: @file(/Users/maksym/Desktop/photo/ava-1-full.png) @contentType(image/png)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

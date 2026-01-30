@@ -1,0 +1,27 @@
+meta {
+  name: Add Comment to Article
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{host_api}}/comments
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:json {
+  {
+    "content": "My comment num 4",
+    "article": "68f54e43c3aff38510011830"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

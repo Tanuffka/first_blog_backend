@@ -13,6 +13,7 @@ import { ArticleModule } from 'src/api/article/article.module';
 import { CommentModule } from 'src/api/comment/comment.module';
 import { FileModule } from 'src/api/file/file.module';
 import { TagModule } from 'src/api/tag/tag.module';
+import { FileStorageModule } from 'src/api/file-storage/file-storage.module';
 
 mongoose.set('debug', true); /** @warning - enabled mongoose debug mode */
 
@@ -39,6 +40,7 @@ mongoose.set('debug', true); /** @warning - enabled mongoose debug mode */
     ArticleModule,
     CommentModule,
     TagModule,
+    FileStorageModule,
   ],
 })
 export class AppModule {}

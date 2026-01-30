@@ -1,0 +1,20 @@
+meta {
+  name: Fetch All Tags
+  type: http
+  seq: 13
+}
+
+get {
+  url: {{host_api}}/tags
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
