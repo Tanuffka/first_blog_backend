@@ -1,6 +1,8 @@
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsUrl, MaxLength } from 'class-validator';
 
+import { PickType } from '@nestjs/swagger';
+
 export class CropOptionsDto {
   @IsNotEmpty({ message: 'Field x is required' })
   @IsNumber(
@@ -38,7 +40,7 @@ export class CropOptionsDto {
   readonly zoom: number;
 }
 
-export class CoverOriginalImageDto {
+export class CoverImageDto {
   @IsNotEmpty({ message: 'Field fileKey is required' })
   @IsUrl(undefined, { message: 'Field fileKey should be a valid URL' })
   @MaxLength(100, { message: 'Field fileKey should not exceed 100 characters' })
@@ -50,10 +52,13 @@ export class CoverOriginalImageDto {
     message: 'Field fileDownloadUrl should not exceed 300 characters',
   })
   readonly fileDownloadUrl: string;
-}
 
-export class CoverCroppedImageDto extends CoverOriginalImageDto {
   @Type(() => CropOptionsDto)
   @IsNotEmpty({ message: 'Field cropOptions is required' })
   readonly cropOptions: CropOptionsDto;
 }
+
+export class CoverCroppedImageDto extends PickType(CoverImageDto, [
+  'fileKey',
+  'fileDownloadUrl',
+] as const) {}

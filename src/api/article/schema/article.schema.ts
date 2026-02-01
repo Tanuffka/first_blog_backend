@@ -27,13 +27,13 @@ export class Article {
   tags: Types.ObjectId[];
 
   @Prop({ nullable: true, type: Object })
-  coverOriginalImage: {
+  coverCroppedImage: {
     fileKey: string;
     fileDownloadUrl: string;
   } | null;
 
   @Prop({ nullable: true, type: Object })
-  coverCroppedImage: {
+  coverImage: {
     fileKey: string;
     fileDownloadUrl: string;
     cropOptions: {
