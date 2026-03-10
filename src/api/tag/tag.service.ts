@@ -11,12 +11,10 @@ export class TagService {
 
   async createOneTag(name: string, articleId: string): Promise<TagDocument> {
     try {
-      const newTag = await this.tagModel.create({
+      return await this.tagModel.create({
         name,
         article: articleId,
       });
-
-      return newTag;
     } catch (error) {
       const err = error as MongooseError;
       throw new Error('Error creating tag: ' + err.message);
@@ -28,14 +26,12 @@ export class TagService {
     articleId: string,
   ): Promise<TagDocument[]> {
     try {
-      const newTags = await this.tagModel.create(
+      return await this.tagModel.create(
         tags.map((tag) => ({
           name: tag,
           article: articleId,
         })),
       );
-
-      return newTags;
     } catch (error) {
       const err = error as MongooseError;
       throw new Error('Error creating tag: ' + err.message);
@@ -47,10 +43,7 @@ export class TagService {
   }
 
   async findAllByArticleId(id: string): Promise<TagDocument[]> {
-    return await this.tagModel
-      .find({ article: id })
-      .orFail(new NotFoundException('Tags not found'))
-      .exec();
+    return await this.tagModel.find({ article: id }).exec();
   }
 
   async findById(id: string): Promise<TagDocument> {

@@ -1,7 +1,10 @@
-import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
-
-import { CoverCroppedImageDto, CoverImageDto } from './cover-image.dto';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 
 export class CreateArticleDto {
   @IsNotEmpty({ message: 'Field title is required' })
@@ -18,11 +21,10 @@ export class CreateArticleDto {
   @IsArray({ message: 'Field tags should be an array' })
   readonly tags: string[];
 
-  @Type(() => CoverImageDto)
+  @IsString({ message: 'Field coverImage should be string' })
+  @MaxLength(200, {
+    message: 'Field coverImage should not exceed 200 characters',
+  })
   @IsOptional()
-  readonly coverImage?: CoverImageDto;
-
-  @Type(() => CoverCroppedImageDto)
-  @IsOptional()
-  readonly coverCroppedImage?: CoverCroppedImageDto;
+  readonly coverImage?: string;
 }

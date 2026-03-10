@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
+import { FileStorageService } from 'src/api/file-storage/file-storage.service';
 import { TagService } from 'src/api/tag/tag.service';
 
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -14,6 +15,7 @@ export class ArticleService {
   constructor(
     @InjectModel(Article.name) private articleModel: Model<Article>,
     private readonly tagService: TagService,
+    private readonly fileStorageService: FileStorageService,
   ) {}
 
   async create(
@@ -92,6 +94,8 @@ export class ArticleService {
     try {
       session.startTransaction();
 
+      const currentArticle = await this.articleModel.findById(id);
+
       const updatedTags = await this.tagService.updateTagsForArticleById(
         id,
         tags,
@@ -117,6 +121,12 @@ export class ArticleService {
         )
         .exec();
 
+      if (currentArticle?.coverImage !== data.coverImage) {
+        await this.fileStorageService.deleteObjectByFileKey(
+          currentArticle!.coverImage,
+        );
+      }
+
       await session.commitTransaction();
 
       return updatedArticle;
@@ -138,7 +148,7 @@ export class ArticleService {
 
       const deletedArticle = await this.articleModel
         .findOneAndDelete({ _id: id, author: userId })
-        .select('id')
+        .select('id coverImage')
         .orFail(
           new NotFoundException(
             'Article not found or user not authorized to delete it',
@@ -147,6 +157,9 @@ export class ArticleService {
         .exec();
 
       await this.tagService.deleteTagsForArticleById(id);
+      await this.fileStorageService.deleteObjectByFileKey(
+        deletedArticle.coverImage,
+      );
 
       await session.commitTransaction();
 

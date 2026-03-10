@@ -26,24 +26,8 @@ export class Article {
   })
   tags: Types.ObjectId[];
 
-  @Prop({ nullable: true, type: Object })
-  coverCroppedImage: {
-    fileKey: string;
-    fileDownloadUrl: string;
-  } | null;
-
-  @Prop({ nullable: true, type: Object })
-  coverImage: {
-    fileKey: string;
-    fileDownloadUrl: string;
-    cropOptions: {
-      x: number;
-      y: number;
-      width: number;
-      height: number;
-      zoom: number;
-    };
-  } | null;
+  @Prop({ required: false, nullable: true, default: null })
+  coverImage: string;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);

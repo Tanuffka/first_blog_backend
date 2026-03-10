@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { CommentModule } from 'src/api/comment/comment.module';
 import { TagModule } from 'src/api/tag/tag.module';
+import { FileStorageModule } from 'src/api/file-storage/file-storage.module';
 
 import { ArticleService } from './article.service';
 import { ArticleController } from './article.controller';
@@ -13,7 +14,7 @@ const ArticleMongooseModule = MongooseModule.forFeature([
 ]);
 
 @Module({
-  imports: [ArticleMongooseModule, CommentModule, TagModule],
+  imports: [ArticleMongooseModule, CommentModule, TagModule, FileStorageModule],
   controllers: [ArticleController],
   providers: [ArticleService],
 })

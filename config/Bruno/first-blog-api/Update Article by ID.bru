@@ -1,13 +1,17 @@
 meta {
-  name: Create Article
+  name: Update Article by ID
   type: http
-  seq: 8
+  seq: 9
 }
 
-post {
-  url: {{host_api}}/articles
+put {
+  url: {{host_api}}/articles/:article_id
   body: json
   auth: bearer
+}
+
+params:path {
+  article_id: 6984ed6ea8430e4e25fa5910
 }
 
 auth:bearer {
@@ -16,11 +20,10 @@ auth:bearer {
 
 body:json {
   {
-    "title": "New Test with tags",
+    "title": "Hello World",
     "content": "<p class=\"editor-paragraph\"><strong>fgdgfdgfd</strong> <u>gdhgt</u> <em>ngcfbnhgfc</em></p>",
     "tags": ["hello_world", "new.world"],
     "coverImage": {
-      "fileName": "original_image_name.jpeg",
       "fileKey": {
         "original": "folder_path/original_image_name.jpeg",
         "cropped": ""
@@ -34,6 +37,10 @@ body:json {
       }
     }
   }
+}
+
+vars:pre-request {
+  article_id: 6984ed6ea8430e4e25fa5910
 }
 
 settings {
