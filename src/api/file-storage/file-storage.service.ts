@@ -68,7 +68,9 @@ export class FileStorageService {
       Key: fileKey,
     });
 
-    return await getSignedUrl(this.S3_CLIENT, command);
+    return await getSignedUrl(this.S3_CLIENT, command, {
+      expiresIn: 3600,
+    });
   }
 
   async getDeleteUrl(fileKey: string): Promise<string> {
