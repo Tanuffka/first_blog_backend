@@ -57,12 +57,12 @@ export class TagService {
     articleId: string,
     tags: string[],
   ): Promise<TagDocument[]> {
-    const currentTags = await this.tagModel.find({ article: articleId });
+    const currentTags = await this.findAllByArticleId(articleId);
 
     /** @description if tag was removed from article, remove from the table */
     for (const tag of currentTags) {
       if (!tags.includes(tag.name)) {
-        await this.delete(tag._id.toString());
+        await this.delete(tag._id.toString(), articleId);
       }
     }
 
