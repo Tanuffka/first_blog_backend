@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { CommentService } from './comment.service';
 import { CommentController } from './comment.controller';
+import { CommentService } from './comment.service';
 import { Comment, CommentSchema } from './schema/comment.schema';
 
 const CommentMongooseModule = MongooseModule.forFeature([

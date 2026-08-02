@@ -10,19 +10,19 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 })
 export class Comment {
   @Prop({ required: true })
-  content: string;
+  content!: string;
 
   @Prop({ default: false })
-  isEdited: boolean;
+  isEdited!: boolean;
 
   @Prop({ required: true, ref: 'Article' })
-  article: Types.ObjectId;
+  article!: Types.ObjectId;
 
   @Prop({ required: true, ref: 'User' })
-  author: Types.ObjectId;
+  author!: Types.ObjectId;
 
   @Prop({ ref: Comment.name })
-  responseTo: Types.ObjectId;
+  responseTo!: Types.ObjectId;
 }
 
 export const CommentSchema = SchemaFactory.createForClass(Comment);

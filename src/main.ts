@@ -1,8 +1,8 @@
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 
-import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
 
 import { setupSwagger } from 'src/shared/utils/swagger.util';
 
@@ -16,7 +16,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
   app.enableCors({
     origin: config.getOrThrow<string>('ALLOWED_ORIGINS').split(','),

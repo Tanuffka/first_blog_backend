@@ -10,8 +10,8 @@ import {
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { lookup } from 'mime-types';
 
-import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class FileStorageService {

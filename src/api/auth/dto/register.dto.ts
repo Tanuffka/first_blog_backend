@@ -9,7 +9,7 @@ export class RegisterDto {
   })
   @IsEmail(undefined, { message: 'Field email should be valid' })
   @IsNotEmpty({ message: 'Field email is required' })
-  email: string;
+  email!: string;
 
   @ApiProperty({
     description: 'User password',
@@ -26,19 +26,19 @@ export class RegisterDto {
     },
     { message: 'Field password must be strong' },
   )
-  password: string;
+  password!: string;
 
   @ApiProperty({
     description: 'User firstname',
     example: 'John',
   })
   @IsNotEmpty({ message: 'Field firstname is required' })
-  firstname: string;
+  firstname!: string;
 
   @ApiProperty({
     description: 'User lastname',
     example: 'Doe',
   })
   @IsNotEmpty({ message: 'Field lastname is required' })
-  lastname: string;
+  lastname!: string;
 }

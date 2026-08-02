@@ -1,0 +1,34 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "ignorePatterns": [],
+  "sortImports": {
+    "newlinesBetween": true,
+    "customGroups": [
+      {
+        "groupName": "nextjs-imports",
+        "elementNamePattern": ["@nestjs/**"]
+      },
+      {
+        "groupName": "absolute-imports",
+        "elementNamePattern": ["src/**"]
+      }
+    ],
+    "groups": [
+      "value-builtin",
+      ["value-external", "type-import"],
+      "nextjs-imports",
+      "absolute-imports",
+      ["value-internal", "type-internal"],
+      ["value-parent", "type-parent"],
+      ["value-sibling", "value-index"],
+      ["type-sibling", "type-index"],
+      "unknown"
+    ]
+  }
+}

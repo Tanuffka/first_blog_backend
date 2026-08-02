@@ -6,5 +6,5 @@ export class FileStorageDto {
   @MaxLength(200, {
     message: 'Field fileKey should not exceed 200 characters',
   })
-  fileKey: string;
+  fileKey!: string;
 }

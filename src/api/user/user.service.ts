@@ -7,17 +7,17 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { hashPassword } from 'src/shared/utils/password.util';
 import { FileService } from 'src/api/file/file.service';
+import { hashPassword } from 'src/shared/utils/password.util';
 
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import {
   PUBLIC_USER_FIELDS,
   PublicUserData,
   User,
   UserDocument,
 } from './schema/user.schema';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {

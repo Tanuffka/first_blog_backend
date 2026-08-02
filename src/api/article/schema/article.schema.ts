@@ -9,25 +9,25 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 })
 export class Article {
   @Prop({ required: true })
-  title: string;
+  title!: string;
 
   @Prop({ required: true })
-  content: string;
+  content!: string;
 
   @Prop({ default: 0 })
-  viewsCount: number;
+  viewsCount!: number;
 
   @Prop({ required: true, ref: 'User' })
-  author: Types.ObjectId;
+  author!: Types.ObjectId;
 
   @Prop({
     ref: 'Tag',
     default: [],
   })
-  tags: Types.ObjectId[];
+  tags!: Types.ObjectId[];
 
   @Prop({ required: false, nullable: true, default: null })
-  coverImage: string;
+  coverImage!: string;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);

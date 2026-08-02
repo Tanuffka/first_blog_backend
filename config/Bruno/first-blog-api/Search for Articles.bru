@@ -1,0 +1,26 @@
+meta {
+  name: Search for Articles
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{host_api}}/articles?limit=10&title=hello world&tags=hello_world,new.world
+  body: none
+  auth: bearer
+}
+
+params:query {
+  limit: 10
+  title: hello world
+  tags: hello_world,new.world
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

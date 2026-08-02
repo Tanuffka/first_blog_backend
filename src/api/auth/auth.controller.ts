@@ -1,3 +1,5 @@
+import type { Request, Response } from 'express';
+
 import {
   Body,
   Controller,
@@ -17,8 +19,6 @@ import {
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-
-import type { Request, Response } from 'express';
 
 @ApiTags('Auth')
 @Controller('auth')

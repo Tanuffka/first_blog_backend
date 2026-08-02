@@ -3,17 +3,17 @@ import { join } from 'path';
 import mongoose from 'mongoose';
 
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 
-import { AuthModule } from 'src/api/auth/auth.module';
-import { UserModule } from 'src/api/user/user.module';
 import { ArticleModule } from 'src/api/article/article.module';
+import { AuthModule } from 'src/api/auth/auth.module';
 import { CommentModule } from 'src/api/comment/comment.module';
+import { FileStorageModule } from 'src/api/file-storage/file-storage.module';
 import { FileModule } from 'src/api/file/file.module';
 import { TagModule } from 'src/api/tag/tag.module';
-import { FileStorageModule } from 'src/api/file-storage/file-storage.module';
+import { UserModule } from 'src/api/user/user.module';
 
 mongoose.set('debug', true); /** @warning - enabled mongoose debug mode */
 

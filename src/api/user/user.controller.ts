@@ -11,8 +11,8 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 
-import { WithJWT } from 'src/api/auth/decorators/with-jwt.decorator';
 import { AuthorizedUser } from 'src/api/auth/decorators/authorized-user.decorator';
+import { WithJWT } from 'src/api/auth/decorators/with-jwt.decorator';
 import { WithFileUpload } from 'src/api/file/with-file-upload.decorator';
 
 import { CreateUserDto } from './dto/create-user.dto';

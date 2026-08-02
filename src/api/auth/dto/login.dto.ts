@@ -9,12 +9,12 @@ export class LoginDto {
   })
   @IsEmail(undefined, { message: 'Email field should be valid' })
   @IsNotEmpty({ message: 'Field email is required' })
-  email: string;
+  email!: string;
 
   @ApiProperty({
     description: 'User password',
     example: '!Password123',
   })
   @IsNotEmpty({ message: 'Field password is required' })
-  password: string;
+  password!: string;
 }

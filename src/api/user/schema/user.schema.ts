@@ -4,19 +4,18 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({
   timestamps: true,
-  id: true,
   toJSON: { versionKey: false },
   toObject: { versionKey: false },
 })
 export class User {
   @Prop({ required: true, unique: true })
-  email: string;
+  email!: string;
 
   @Prop({ required: true })
-  firstname: string;
+  firstname!: string;
 
   @Prop({ required: true })
-  lastname: string;
+  lastname!: string;
 
   @Prop({ required: false })
   bio?: string;
@@ -25,11 +24,11 @@ export class User {
   avatarUrl?: string;
 
   @Prop({ required: true })
-  passwordHash: string;
+  passwordHash!: string;
 }
 
 export const PUBLIC_USER_FIELDS: (keyof UserDocument)[] = [
-  'id',
+  '_id',
   'email',
   'firstname',
   'lastname',
@@ -38,7 +37,7 @@ export const PUBLIC_USER_FIELDS: (keyof UserDocument)[] = [
 ];
 
 export const SOCIAL_USER_FIELDS: (keyof UserDocument)[] = [
-  'id',
+  '_id',
   'firstname',
   'lastname',
   'avatarUrl',

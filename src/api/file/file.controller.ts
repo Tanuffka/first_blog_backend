@@ -1,3 +1,5 @@
+import type { Response } from 'express';
+
 import {
   Controller,
   Get,
@@ -8,8 +10,6 @@ import {
 } from '@nestjs/common';
 
 import { FileService } from './file.service';
-
-import type { Response } from 'express';
 
 /** NOTE: currently not working */
 @Controller('public')

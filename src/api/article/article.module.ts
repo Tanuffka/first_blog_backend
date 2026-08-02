@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { CommentModule } from 'src/api/comment/comment.module';
-import { TagModule } from 'src/api/tag/tag.module';
 import { FileStorageModule } from 'src/api/file-storage/file-storage.module';
+import { TagModule } from 'src/api/tag/tag.module';
 
-import { ArticleService } from './article.service';
 import { ArticleController } from './article.controller';
+import { ArticleService } from './article.service';
 import { Article, ArticleSchema } from './schema/article.schema';
 
 const ArticleMongooseModule = MongooseModule.forFeature([

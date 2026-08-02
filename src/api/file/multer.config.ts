@@ -1,11 +1,10 @@
-import { extname } from 'path';
 import * as fs from 'node:fs';
+import { extname } from 'path';
 
+import type { Request } from 'express';
 import { diskStorage } from 'multer';
 
 import { PublicUserData } from 'src/api/user/schema/user.schema';
-
-import type { Request } from 'express';
 
 export const multerConfig = {
   preservePaths: true,

@@ -1,21 +1,21 @@
+import type { Request, Response } from 'express';
+
 import {
   ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 import { UserDocument } from 'src/api/user/schema/user.schema';
 import { UserService } from 'src/api/user/user.service';
-import { comparePassword } from 'src/shared/utils/password.util';
 import { ms, type StringValue } from 'src/shared/utils/ms.util';
+import { comparePassword } from 'src/shared/utils/password.util';
 
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { JwtPayload } from './interfaces/jwt.interface';
-
-import type { Request, Response } from 'express';
 
 @Injectable()
 export class AuthService {

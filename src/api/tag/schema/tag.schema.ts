@@ -9,10 +9,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 })
 export class Tag {
   @Prop({ required: true })
-  name: string;
+  name!: string;
 
   @Prop({ required: true, ref: 'Article' })
-  article: Types.ObjectId;
+  article!: Types.ObjectId;
 }
 
 export const TagSchema = SchemaFactory.createForClass(Tag);

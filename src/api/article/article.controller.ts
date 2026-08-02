@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 
 import { AuthorizedUser } from 'src/api/auth/decorators/authorized-user.decorator';
@@ -16,6 +17,7 @@ import { CommentService } from 'src/api/comment/comment.service';
 
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
+import { SearchQueryDto } from './dto/search-query.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 
 @Controller('articles')
@@ -37,8 +39,8 @@ export class ArticleController {
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  findAll() {
-    return this.articleService.findAll();
+  search(@Query() searchQueryDto: SearchQueryDto) {
+    return this.articleService.findAllWithSearchParams(searchQueryDto);
   }
 
   @HttpCode(HttpStatus.OK)

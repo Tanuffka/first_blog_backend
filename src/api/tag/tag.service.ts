@@ -1,4 +1,4 @@
-import { Model, MongooseError } from 'mongoose';
+import { Model, MongooseError, Types } from 'mongoose';
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -13,7 +13,7 @@ export class TagService {
     try {
       return await this.tagModel.create({
         name,
-        article: articleId,
+        article: new Types.ObjectId(articleId),
       });
     } catch (error) {
       const err = error as MongooseError;
@@ -29,7 +29,7 @@ export class TagService {
       return await this.tagModel.create(
         tags.map((tag) => ({
           name: tag,
-          article: articleId,
+          article: new Types.ObjectId(articleId),
         })),
       );
     } catch (error) {

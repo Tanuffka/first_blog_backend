@@ -1,4 +1,4 @@
-import { Model, MongooseError } from 'mongoose';
+import { Model, MongooseError, Types } from 'mongoose';
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -40,7 +40,7 @@ export class CommentService {
     try {
       const newComment = await this.commentModel.create({
         ...comment,
-        author: userId,
+        author: new Types.ObjectId(userId),
       });
 
       return newComment.populate(COMMENT_POPULATION_QUERY);
@@ -75,7 +75,7 @@ export class CommentService {
       .findOneAndUpdate(
         {
           _id: id,
-          author: userId,
+          author: new Types.ObjectId(userId),
         },
         { ...data, isEdited: true },
         {
@@ -93,7 +93,7 @@ export class CommentService {
 
   async delete(id: string, userId: string): Promise<CommentDocument> {
     return await this.commentModel
-      .findOneAndDelete({ _id: id, author: userId })
+      .findOneAndDelete({ _id: id, author: new Types.ObjectId(userId) })
       .select('id')
       .orFail(
         new NotFoundException(

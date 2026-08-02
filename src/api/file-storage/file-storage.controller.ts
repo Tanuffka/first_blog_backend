@@ -2,8 +2,8 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 
 import { WithJWT } from 'src/api/auth/decorators/with-jwt.decorator';
 
-import { FileStorageService } from './file-storage.service';
 import { FileStorageDto } from './dto/file-storage.dto';
+import { FileStorageService } from './file-storage.service';
 
 @Controller('file-storage')
 export class FileStorageController {

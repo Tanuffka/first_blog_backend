@@ -5,8 +5,8 @@ export class CreateTagDto {
   @MaxLength(10, {
     message: 'Field tag should not exceed 10 characters',
   })
-  readonly name: string;
+  readonly name!: string;
 
   @IsNotEmpty({ message: 'Field articleId is required' })
-  readonly articleId: string;
+  readonly articleId!: string;
 }

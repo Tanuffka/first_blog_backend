@@ -3,9 +3,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { FileModule } from 'src/api/file/file.module';
 
-import { UserService } from './user.service';
-import { UserController } from './user.controller';
 import { User, UserSchema } from './schema/user.schema';
+import { UserController } from './user.controller';
+import { UserService } from './user.service';
 
 const UserMongooseModule = MongooseModule.forFeature([
   { name: User.name, schema: UserSchema },

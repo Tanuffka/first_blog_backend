@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "nodenext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -8,14 +8,18 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2023",
     "sourceMap": true,
+    "rootDir": "./src",
+    "paths": {
+      "src": ["./src"],
+      "src/*": ["./src/*"]
+    },
     "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
+    "incremental": false,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
-  },
+  }
 }
