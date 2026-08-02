@@ -160,6 +160,13 @@ export class ArticleService {
       },
     });
 
+    /** @description Set the author field to the first element of the author array */
+    pipeline.push({
+      $set: {
+        author: { $first: '$author' },
+      },
+    });
+
     /** @description Sort, skip, and limit the results */
     pipeline.push({ $sort: { createdAt: order === Order.ASC ? 1 : -1 } });
     pipeline.push({ $skip: skip });
