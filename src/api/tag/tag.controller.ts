@@ -1,5 +1,13 @@
-import { Controller, Get, HttpCode, HttpStatus, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Query,
+} from '@nestjs/common';
 
+import { SearchQueryDto } from './dto/search-query.dto';
 import { TagService } from './tag.service';
 
 @Controller('tags')
@@ -8,8 +16,8 @@ export class TagController {
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  findAll() {
-    return this.tagService.findAll();
+  findAll(@Query() searchQueryDto: SearchQueryDto) {
+    return this.tagService.findAll(searchQueryDto);
   }
 
   @HttpCode(HttpStatus.OK)

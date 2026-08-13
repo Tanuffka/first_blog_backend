@@ -1,8 +1,9 @@
-import { Model, MongooseError, Types } from 'mongoose';
+import { Model, MongooseError, Types, type QueryFilter } from 'mongoose';
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
+import { SearchQueryDto } from './dto/search-query.dto';
 import { Tag, TagDocument } from './schema/tag.schema';
 
 @Injectable()
@@ -38,8 +39,14 @@ export class TagService {
     }
   }
 
-  async findAll(): Promise<TagDocument[]> {
-    return await this.tagModel.find().exec();
+  async findAll({ name }: SearchQueryDto): Promise<string[]> {
+    const query: QueryFilter<Tag> = {};
+
+    if (name) {
+      query.name = { $regex: name, $options: 'i' };
+    }
+
+    return await this.tagModel.find(query).distinct('name').exec();
   }
 
   async findAllByArticleId(id: string): Promise<TagDocument[]> {
